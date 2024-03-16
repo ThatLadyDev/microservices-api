@@ -8,5 +8,9 @@ enum TasksEnum
 {
     use EnumTrait;
     
-    case callReason;
+    case call_reason;
+    case call_actions;
+    case satisfaction;
+    case call_segments;
+    case summary;
 }
