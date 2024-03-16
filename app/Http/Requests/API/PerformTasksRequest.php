@@ -26,7 +26,7 @@ class PerformTasksRequest extends FormRequest
     {
         return [
             'text' => ['required', 'string', 'max:' . $this->textMaximumLength],
-            'tasks' => ['required', 'array', new TaskEnumValidationRule]
+            'tasks' => ['present', 'array', new TaskEnumValidationRule]
         ];
     }
 }
