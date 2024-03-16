@@ -2,6 +2,7 @@
 
 namespace App\Actions;
 
+use App\Http\Requests\API\PerformTasksRequest;
 use Lorisleiva\Actions\Concerns\AsAction;
 
 class PerformTasks
@@ -13,7 +14,7 @@ class PerformTasks
         // ...
     }
 
-    public function asController()
+    public function asController(PerformTasksRequest $request)
     {
         
     }
