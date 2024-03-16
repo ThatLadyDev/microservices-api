@@ -17,18 +17,21 @@ class TaskEnumValidationRule implements ValidationRule
     {
         // Ensure $value is an array
         if (!is_array($value)) {
-            $fail('Tasks must be an array');
+            // If $value is not an array, return early without executing the custom rule
+            return;
         }
 
         // Ensure $value isn't an empty array
-        if(count($value) === 0){
+        if(is_array($value) && count($value) === 0){
             $fail('Tasks can\'t be empty');
         }
 
         // Validate each task in the array against the TaskEnum values
-        foreach ($value as $task) {
-            if (!in_array($task, TasksEnum::toArray())) {
-                $fail('One or more tasks are invalid.');
+        else{
+            foreach ($value as $task) {
+                if (!in_array($task, TasksEnum::toArray())) {
+                    $fail('One or more tasks are invalid.');
+                }
             }
         }
     }
