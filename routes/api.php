@@ -1,10 +1,9 @@
 <?php
 
-use App\Actions\PerformTasks;
+use App\Actions\API\FetchMockResults;
+use App\Actions\API\PerformTasks;
 use Illuminate\Support\Facades\Route;
 
-// Route::get('/user', function (Request $request) {
-//     return $request->user();
-// })->middleware('auth:sanctum');
-
 Route::post('perform-tasks', PerformTasks::class);
+Route::get('mock-results/{jobId}', FetchMockResults::class);
+
