@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Actions;
+namespace App\Actions\API;
 
 use App\Jobs\ProcessTasksJob;
 use Illuminate\Http\JsonResponse;
