@@ -15,13 +15,15 @@ class ProcessTasksJob implements ShouldQueue
     public $jobId;
 
     public $resultAction;
+    public $taskData;
 
     /**
      * Create a new job instance.
      */
-    public function __construct($resultAction)
+    public function __construct(string $resultAction, array $taskData = [])
     {
         $this->resultAction = $resultAction;
+        $this->taskData = $taskData;
     }
 
     /**

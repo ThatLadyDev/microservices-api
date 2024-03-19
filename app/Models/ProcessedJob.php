@@ -9,9 +9,14 @@ class ProcessedJob extends Model
 {
     use HasFactory;
 
-    protected $fillables = [
+    protected $fillable = [
         "uuid",
         "type",
-        "job_id"
+        "job_id",
+        "metadata"
+    ];
+
+    protected $casts = [
+        "metadata" => "array"
     ];
 }

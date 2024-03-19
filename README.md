@@ -29,3 +29,16 @@ Sail (for dev purposes).
 - Implement a GET route to retrieve the mock results.
 - This route should accept a Job ID and return the corresponding mock results.
 
+## Application Requirements
+
+**Test-Driven Development**
+
+1. Employ TDD methodologies throughout the development.
+2. Use Pest for writing and running tests.
+3. Ensure comprehensive test coverage for all functionalities.
+
+
+**Docker Integration via Laravel Sail**
+1. Ensure the application is containerized and can be run using Docker.
+2. Utilize Laravel Sail for easy Docker management.
+3. Include Swoole within the Docker setup for Octane.

@@ -12,12 +12,15 @@ class PerformTasks
 {
     use AsAction;
 
-    public function handle(string $mockResultAction)
+    /**
+     * Handle the request to peform a task operation
+     * @param string $mockResultAction
+     * @param array $inputData
+     * @return void
+     */
+    public function handle(string $mockResultAction, array $inputData = [])
     {
         dispatch(new ProcessTasksJob($mockResultAction));
-
-        // Assert that the job was pushed onto the queue
-        Queue::assertPushed(ProcessTasksJob::class);
     }
 
     /**
@@ -27,7 +30,7 @@ class PerformTasks
      */
     public function asController(PerformTasksRequest $request): JsonResponse
     {
-        $this->handle($this->fetchMockResultAction());
+        $this->handle($this->fetchMockResultAction(), $request->validated());
         return response()->json([
             'success' => true,
             'message' => 'Mock result action added to a queue',

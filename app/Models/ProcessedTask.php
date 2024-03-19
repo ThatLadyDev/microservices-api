@@ -9,7 +9,7 @@ class ProcessedTask extends Model
 {
     use HasFactory;
 
-    protected $fillables = [
+    protected $fillable = [
         "uuid",
         "title",
         "text",
