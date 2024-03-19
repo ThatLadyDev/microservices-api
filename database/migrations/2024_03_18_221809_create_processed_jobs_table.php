@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->uuid();
             $table->string('type');
-            $table->mediumInteger('job_id');
+            $table->string('job_id');
             $table->json('metadata');
             $table->timestamps();
         });
