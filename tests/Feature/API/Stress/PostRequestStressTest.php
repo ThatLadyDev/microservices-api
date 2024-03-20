@@ -4,7 +4,7 @@ use App\Enums\TasksEnum;
 use Illuminate\Support\Arr;
 use function Pest\Stressless\stress;
 
-it('handles concurrent POST requests : {route-here}', function () {
+//it('handles concurrent POST requests : {route-here}', function () {
 //    $tasks = TasksEnum::toArray();
 //    $requestData = [
 //        'text' => 'test-test',
@@ -17,15 +17,15 @@ it('handles concurrent POST requests : {route-here}', function () {
 //
 //    expect($result->requests->duration->med)
 //        ->toBeLessThan(6);
-});
+//});
 
-it('handles concurrent POST requests', function () {
+//it('handles concurrent POST requests', function () {
+//
+//});
 
-});
-
-it('handles mixed GET and POST requests', function () {
-
-});
+//it('handles mixed GET and POST requests', function () {
+//
+//});
 
 //test('example', function () {
 //    $response = $this->get('/');
