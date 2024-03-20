@@ -11,27 +11,4 @@ trait EnumTrait
             self::cases()
         );
     }
-
-    public static function getCaseName($value): string
-    {
-        $name = '';
-        foreach (self::cases() as $case) {
-            if ($case->value === (int)$value) {
-                $name = $case->name;
-            }
-        }
-        return $name;
-    }
-
-    public static function getCaseValue($name): string
-    {
-        $value = 0;
-        foreach (self::cases() as $case) {
-            if ($case->name === strtoupper($name)) {
-                $value = $case->value;
-            }
-        }
-        return $value;
-    }
-
 }

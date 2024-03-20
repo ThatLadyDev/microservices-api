@@ -6,18 +6,36 @@ use Illuminate\Http\JsonResponse;
 
 class ApiResponse
 {
+    /** @var array $structure */
+    private static array $structure;
+
+    /** @var int $statusCode */
+    private static int $statusCode;
+
     /**
      * @param string $message
      * @param array $data
      * @param int $statusCode
-     * @return JsonResponse
+     * @return ApiResponse
      */
-    public static function success(string $message = '', array $data = [], int $statusCode = 200): JsonResponse
+    public static function success(string $message = '', array $data = [], int $statusCode = 200): ApiResponse
     {
-        $data = self::responseStructure(true, $message, $data);
-        return response()->json($data, $statusCode);
+        self::$statusCode = $statusCode;
+        self::$structure = self::responseStructure(true, $message, $data);
+        return new self;
     }
 
+    public function toJson()
+    {
+        return response()->json($this::$structure, $this::$statusCode);
+    }
+
+    public function toArray()
+    {
+        return $this::$structure;
+    }
+
+    // @codeCoverageIgnoreStart
     /**
      * @param string $message
      * @param int $statusCode
@@ -29,6 +47,7 @@ class ApiResponse
         $data = self::responseStructure(false, $message, $data);
         return response()->json($data, $statusCode);
     }
+    // @codeCoverageIgnoreEnd
 
     /**
      * @param bool $success

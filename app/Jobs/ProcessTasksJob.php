@@ -9,7 +9,9 @@ use App\Models\ProcessedTask;
 use Illuminate\Bus\Queueable;
 use App\DTOs\ProcessedJobDTO;
 use App\DTOs\ProcessedTaskDTO;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Queue\SerializesModels;
+use App\Repositories\DTO\DTORepository;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -28,6 +30,9 @@ class ProcessTasksJob implements ShouldQueue
     /** @var EloquentRepository $eloquentRepository */
     private EloquentRepository $eloquentRepository;
 
+    /** @var DTORepository $dtoRepository */
+    private DTORepository $dtoRepository;
+
     /**
      * Create a new job instance.
      */
@@ -35,11 +40,10 @@ class ProcessTasksJob implements ShouldQueue
     {
         $this->taskData = $taskData;
         $this->eloquentRepository = new EloquentRepository();
+        $this->dtoRepository = new DTORepository();
     }
 
-    /**
-     * Execute the job.
-     */
+    // @codeCoverageIgnoreStart
     public function handle(): void
     {
         $this->jobId = $this->job->getJobId();
@@ -49,60 +53,17 @@ class ProcessTasksJob implements ShouldQueue
 
             $this->eloquentRepository->create(
                 new ProcessedJob(),
-                $this->generateProcessedJobDTO($taskUuid)->toArray()
+                $this->dtoRepository->generate('ProcessedJob', ['jobId' => $this->jobId, 'taskUuid' => $taskUuid]),
             );
+
             $this->eloquentRepository->create(
                 new ProcessedTask(),
-                $this->generateProcessedTaskDTO($taskUuid, $task)->toArray()
+                $this->dtoRepository->generate(
+                    'ProcessedTask',
+                    ['taskUuid' => $taskUuid, 'title' => $task, 'text' => $this->taskData['text']]
+                )
             );
         }
     }
-
-    /**
-     * @param string $taskUuid
-     * @param string $title
-     * @return ProcessedTaskDTO
-     */
-    private function generateProcessedTaskDTO(string $taskUuid, string $title): ProcessedTaskDTO
-    {
-        return new ProcessedTaskDTO(
-            $taskUuid,
-            $title,
-            $this->taskData['text'],
-            $this->fetchMockResultAction($title),
-            true
-        );
-    }
-
-    /**
-     * @param string $taskUuid
-     * @return ProcessedJobDTO
-     */
-    private function generateProcessedJobDTO(string $taskUuid): ProcessedJobDTO
-    {
-        return new ProcessedJobDTO(
-            Str::uuid(),
-            'task',
-            $this->jobId,
-            ['task-uuid' => $taskUuid]
-        );
-    }
-
-    /**
-     * Summary of fetchMockResultAction
-     * @param string $task
-     * @return mixed
-     */
-    private function fetchMockResultAction(string $task)
-    {
-        $actions = [
-            'call_reason' => ['Log reason', 'Document purpose', 'Note reason'],
-            'call_actions' => ['Assign tasks', 'Note actions', 'Schedule follow-ups'],
-            'satisfaction' => ['Send survey', 'Confirm satisfaction', 'Log feedback'],
-            'call_segments' => ['Summarize points', 'Segment notes', 'Task segments'],
-            'summary' => ['Document overview', 'Brief summary', 'Capture highlights']
-        ];
-
-        return Arr::random($actions[$task]);
-    }
+    // @codeCoverageIgnoreEnd
 }

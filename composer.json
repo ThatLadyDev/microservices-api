@@ -13,6 +13,7 @@
         "predis/predis": "^2.2"
     },
     "require-dev": {
+        "brianium/paratest": "^7.4",
         "fakerphp/faker": "^1.23",
         "laravel/octane": "^2.3",
         "laravel/pint": "^1.13",
@@ -20,6 +21,7 @@
         "mockery/mockery": "^1.6",
         "nunomaduro/collision": "^8.0",
         "pestphp/pest": "^2.34",
+        "pestphp/pest-plugin-stressless": "^2.2",
         "phpunit/phpunit": "^10.5",
         "spatie/laravel-ignition": "^2.4"
     },
