@@ -24,9 +24,4 @@ class FetchMockResults
             'data' => $data
         ]);
     }
-
-    private function fetchResults()
-    {
-
-    }
 }
