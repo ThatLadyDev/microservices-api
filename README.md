@@ -125,4 +125,17 @@ make stop
   - TDD
   - DDD
 
+### Please Note
+Stress testing was not worked on, I faced issues with pest php's stress test plugin, 
+it refused to download the k6 file needed to run stress tests locally.
+**Instance 1**
+<img src="https://res.cloudinary.com/xxsavage/image/upload/v1710930371/microservices-api/2024-03-20_11-22.png">
 
+**Instance 2**
+<img src="https://res.cloudinary.com/xxsavage/image/upload/v1710930476/microservices-api/2024-03-20_11-27_1.png">
+
+**Instance 3**
+<img src="https://res.cloudinary.com/xxsavage/image/upload/v1710930477/microservices-api/2024-03-20_11-27.png">
+
+Regardless, I went ahead to work on a sample stress test.
+<img src="https://res.cloudinary.com/xxsavage/image/upload/v1710930624/microservices-api/2024-03-20_11-30.png">

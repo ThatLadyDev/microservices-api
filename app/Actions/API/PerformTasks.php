@@ -30,6 +30,6 @@ class PerformTasks
     public function asController(PerformTasksRequest $request): JsonResponse
     {
         $this->handle($request->validated());
-        return ApiResponse::success('Mock result action added to a queue');
+        return ApiResponse::success('Mock result action added to a queue')->toJson();
     }
 }

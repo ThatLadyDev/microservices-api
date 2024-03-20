@@ -6,8 +6,6 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class FetchMockResultsRequest extends FormRequest
 {
-    private string $jobId;
-
     /**
      * Determine if the user is authorized to make this request.
      */
@@ -31,18 +29,5 @@ class FetchMockResultsRequest extends FormRequest
     public function validationData()
     {
         return array_merge(parent::validationData(), ['job-id' => $this->route('jobId')]);
-    }
-
-    protected function passedValidation()
-    {
-        $this->jobId = $this->validated('job-id');
-    }
-
-    /**
-     * @return string
-     */
-    public function getJobId(): string
-    {
-        return $this->jobId;
     }
 }
