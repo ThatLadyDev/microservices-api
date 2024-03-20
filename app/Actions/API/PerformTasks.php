@@ -4,6 +4,7 @@ namespace App\Actions\API;
 
 use App\Jobs\ProcessTasksJob;
 use Illuminate\Http\JsonResponse;
+use App\Http\Responses\ApiResponse;
 use Lorisleiva\Actions\Concerns\AsAction;
 use App\Http\Requests\API\PerformTasksRequest;
 
@@ -29,9 +30,6 @@ class PerformTasks
     public function asController(PerformTasksRequest $request): JsonResponse
     {
         $this->handle($request->validated());
-        return response()->json([
-            'success' => true,
-            'message' => 'Mock result action added to a queue',
-        ]);
+        return ApiResponse::success('Mock result action added to a queue');
     }
 }
